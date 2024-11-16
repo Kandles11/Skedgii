@@ -3,17 +3,20 @@
 
 namespace Puck
 {
-    Connection::Connection(int write_max_size)
+    Connection::Connection(esp_http_client_config_t const &config, int write_max_size)
     {
-        const esp_http_client_config_t ESP_HTTP_CONFIG{
-            .host = "127.0.0.1",
-            .port = 1111,
-            .path = "/",
-            .query = "esp",
-        };
-
-        handle.init(&ESP_HTTP_CONFIG);
+        handle.init(&config);
         handle.open(write_max_size);
+    }
+    Connection::Connection(const char *host, int port, const char *path, const char *query, int write_max_size)
+        : Connection({
+                         .host = host,
+                         .port = port,
+                         .path = path,
+                         .query = query,
+                     },
+                     write_max_size)
+    {
     }
 
     Connection::~Connection()

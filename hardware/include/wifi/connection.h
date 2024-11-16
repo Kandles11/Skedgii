@@ -26,7 +26,8 @@ namespace Puck
     class Connection
     {
     public:
-        Connection(int write_max_size = 0);
+        Connection(esp_http_client_config_t const& config, int write_max_size = 0);
+        Connection(const char* host, int port, const char* path, const char* query, int write_max_size = 0);
         ~Connection();
 
         Connection(Connection&& other);
