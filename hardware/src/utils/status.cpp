@@ -6,6 +6,7 @@
 namespace Puck
 {
     bool connected = false;
+    bool vibrating = false;
 
     bool getConnectionStatus() {
         return connected;
@@ -13,6 +14,14 @@ namespace Puck
 
     void setConnectionStatus(bool value) {
         connected = value;
+    }
+
+    bool getVibrationStatus() {
+        return vibrating;
+    }
+
+    void setVibrationStatus(bool value) {
+        vibrating = value;
     }
 };
 

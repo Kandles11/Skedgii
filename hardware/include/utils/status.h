@@ -6,8 +6,8 @@ namespace Puck
     bool getConnectionStatus();
     void setConnectionStatus(bool value);
 
-    bool getLoggingStatus();
-    void setLoggingStatus(bool value);
+    bool getVibrationStatus();
+    void setVibrationStatus(bool value);
 };
 
 #endif
