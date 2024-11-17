@@ -9,7 +9,7 @@ namespace Puck
         handle.open(write_max_size);
     }
     Connection::Connection(const char *host, int port, const char *path, const char *query, int write_max_size)
-        : Connection({
+        : Connection(esp_http_client_config_t{
                          .host = host,
                          .port = port,
                          .path = path,

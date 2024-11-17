@@ -11,22 +11,23 @@
 #include "../env.h"
 
 using namespace Puck;
-
-void setup() {
+void setup()
+{
     // Serial port for debugging purposes
-    if (DO_LOGGING) Serial.begin(115200);
+    if (DO_LOGGING)
+        Serial.begin(115200);
 
-    setupPuck();
-    vibrate(1000, 1000, true);
+    Control::Setup();
+    Control::Vibrate(1000, 1000, true);
 
     // Connect to the WiFi
     connectWiFI();
 }
 
-void loop() {
+void loop()
+{
     delay(100);
-  	timerStep();
+    timerStep();
 }
 
 #endif
-

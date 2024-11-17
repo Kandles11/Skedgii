@@ -1,12 +1,9 @@
-#ifndef PUCK_VIBRATION_CPP
-#define PUCK_VIBRATION_CPP
-
 #include "control/vibration.h"
 
 #include "Arduino.h"
 #include "utils/config.h"
 
-namespace Puck
+namespace Puck::Control
 {
     void setupVibration() {
         pinMode(VIBRATION_SIGNAL_PIN, OUTPUT);
@@ -20,5 +17,3 @@ namespace Puck
         digitalWrite(VIBRATION_SIGNAL_PIN, LOW);
     }
 };
-
-#endif
