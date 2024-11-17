@@ -35,14 +35,12 @@ browser.webRequest.onBeforeRequest.addListener((details) => {
                         console.log("successful query!");
 
                         obj["schedules"] = newSchedules;
-
-                        filter.write(encoder.encode(JSON.stringify(obj)));
-                        filter.close();
                     } else {
                         console.log("unable to contact server!");
-                        filter.write(encoder.encode(JSON.stringify(obj)));
-                        filter.close();
                     }
+                    browser.runtime.sendMessage(encoder.encode(JSON.stringify(obj)));
+                    filter.write(encoder.encode(JSON.stringify(obj)));
+                    filter.close();
                 }
             }
             conn.send(JSON.stringify(oldSchedules));
