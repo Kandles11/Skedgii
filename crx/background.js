@@ -21,7 +21,7 @@ browser.webRequest.onBeforeRequest.addListener((details) => {
         filter.onstop = (event) => {
             let obj = JSON.parse(str);
             const oldSchedules = obj["schedules"];
-            console.log(JSON.stringify(oldSchedules));
+            // console.log(JSON.stringify(oldSchedules));
 
             let conn = new XMLHttpRequest();
             conn.open("POST", API_ENDPOINT, false);
@@ -31,8 +31,8 @@ browser.webRequest.onBeforeRequest.addListener((details) => {
                     if (conn.status == 200) {
                         let newSchedules = JSON.parse(conn.responseText);
                         newSchedules = newSchedules["results"];
-                        newSchedules.sort((a, b) => JSON.stringify(a["combination"]).localeCompare(JSON.stringify(b["combination"])));
-                        console.log("response", newSchedules);
+                        // console.log("response", newSchedules);
+                        console.log("successful query!");
 
                         obj["schedules"] = newSchedules;
 
@@ -48,8 +48,7 @@ browser.webRequest.onBeforeRequest.addListener((details) => {
             conn.send(JSON.stringify(oldSchedules));
         }
 
-        console.log("Hello background", details);
-        // console.log("Cookies", await browser.cookies.getAll({ domain: "collegescheduler.com" }));
+        // console.log("Hello background", details);
     }
 
     return {};
