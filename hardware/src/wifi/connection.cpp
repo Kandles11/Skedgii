@@ -8,6 +8,7 @@ namespace Puck
         handle.init(&config);
         handle.open(write_max_size);
     }
+
     Connection::Connection(const char *host, int port, const char *path, const char *query, int write_max_size)
         : Connection(esp_http_client_config_t{
                          .host = host,
@@ -67,6 +68,10 @@ namespace Puck
         esp_err_t http_client::set_method(esp_http_client_method_t method)
         {
             return esp_http_client_set_method(handle, method);
+        }
+        esp_err_t http_client::set_timeout_ms(int timeout_ms)
+        {
+            return esp_http_client_set_timeout_ms(handle, 1000);
         }
         int http_client::get_status_code()
         {
