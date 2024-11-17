@@ -20,21 +20,32 @@ browser.webRequest.onBeforeRequest.addListener((details) => {
         };
         filter.onstop = (event) => {
             let obj = JSON.parse(str);
-            const toSend = obj["schedules"].map((value) => value["combination"]);
-            console.log(JSON.stringify(toSend));
+            const oldSchedules = obj["schedules"];
+            console.log(JSON.stringify(oldSchedules));
 
             let conn = new XMLHttpRequest();
             conn.open("POST", API_ENDPOINT, false);
             conn.setRequestHeader("Content-Type", "application/json");
             conn.onreadystatechange = function() {
-                if (conn.readyState == 4 && conn.status == 200) {
-                    console.log("response", conn.response);
+                if (conn.readyState == 4) {
+                    if (conn.status == 200) {
+                        let newSchedules = JSON.parse(conn.responseText);
+                        newSchedules = newSchedules["results"];
+                        newSchedules.sort((a, b) => JSON.stringify(a["combination"]).localeCompare(JSON.stringify(b["combination"])));
+                        console.log("response", newSchedules);
 
-                    filter.write(encoder.encode(str));
-                    filter.disconnect();
+                        obj["schedules"] = newSchedules;
+
+                        filter.write(encoder.encode(JSON.stringify(obj)));
+                        filter.close();
+                    } else {
+                        console.log("unable to contact server!");
+                        filter.write(encoder.encode(JSON.stringify(obj)));
+                        filter.close();
+                    }
                 }
             }
-            conn.send(JSON.stringify(toSend));
+            conn.send(JSON.stringify(oldSchedules));
         }
 
         console.log("Hello background", details);
