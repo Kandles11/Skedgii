@@ -28,7 +28,7 @@ class JSONEndpointView(View):
         # Example GET response
         response_data = {
             "message": "This is a GET response.",
-            "data": {"info": "Provide some JSON or check the endpoint details."},
+            "data": {"info": "Provide some JSON erm sigma int details."},
         }
         return JsonResponse(response_data)
 
@@ -187,3 +187,13 @@ def rate_classes(data):
     sorted_results = sorted(results, key=lambda x: x["heuristic"], reverse=True)
     logging.info("Final sorted results: %s", sorted_results)
     return sorted_results
+
+@method_decorator(csrf_exempt, name="dispatch")
+class PuckEndpoint(View):
+     def get(self, request, *args, **kwargs):
+        # Example GET response
+        response_data = {
+            "message": "This is a GET response.",
+            "data": {"classOpen": True},
+        }
+        return JsonResponse(response_data)
