@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Hello Extensions",
+  "description": "Base Level Extension",
+  "version": "1.0",
+  "action": {
+    "default_popup": "hello.html",
+    "default_icon": "hello_extensions.png"
+  },
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "content_scripts": [
+    {
+      "js": ["scripts/updater.js"],
+      "matches": ["*://utdallas.collegescheduler.com/*"]
+    }
+  ],
+  "permissions": ["webRequest", "cookies"],
+  "host_permissions": ["*://utdallas.collegescheduler.com/*"]
+}
+
