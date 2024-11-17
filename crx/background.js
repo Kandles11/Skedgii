@@ -6,8 +6,8 @@ const networkFilters = {
 
 const generateUriRegex = /^.*:\/\/utdallas\.collegescheduler\.com\/api\/terms\/[^\/]+\/schedules\/generate$/;
 
-// const API_ENDPOINT = "http://100.65.237.99:8000/ratings/json-endpoint/";
-const API_ENDPOINT = "http://api.skedgii.tech/ratings/json-endpoint/";
+const API_ENDPOINT = "http://100.65.237.99:8000/ratings/json-endpoint/";
+// const API_ENDPOINT = "http://api.skedgii.tech/ratings/json-endpoint/";
 
 browser.webRequest.onBeforeRequest.addListener((details) => {
     if (details.url.match(generateUriRegex)) {
