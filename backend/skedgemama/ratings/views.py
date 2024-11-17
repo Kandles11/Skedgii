@@ -9,6 +9,7 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 import requests
 import environ
 
+class_state = {"classOpen": False}
 
 env = environ.Env()
 environ.Env.read_env()
@@ -190,10 +191,19 @@ def rate_classes(data):
 
 @method_decorator(csrf_exempt, name="dispatch")
 class PuckEndpoint(View):
-     def get(self, request, *args, **kwargs):
-        # Example GET response
+    def get(self, request, *args, **kwargs):
+        # Respond with the current state of classOpen
         response_data = {
-            "message": "This is a GET response.",
-            "data": {"classOpen": True},
+            "message": "Current state retrieved.",
+            "data": {"classOpen": class_state["classOpen"]},
+        }
+        return JsonResponse(response_data)
+
+    def post(self, request, *args, **kwargs):
+        # Toggle the state of classOpen
+        class_state["classOpen"] = not class_state["classOpen"]
+        response_data = {
+            "message": "State toggled successfully.",
+            "data": {"classOpen": class_state["classOpen"]},
         }
         return JsonResponse(response_data)
