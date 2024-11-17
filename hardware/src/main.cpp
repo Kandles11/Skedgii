@@ -19,6 +19,7 @@ void setup()
 
     Control::Setup();
     Control::Vibrate(1000, 1000, true);
+    Control::DrawText("Hello World 1\nHello World 2\nHello World 3");
 
     // Connect to the WiFi
     connectWiFI();
