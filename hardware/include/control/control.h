@@ -4,8 +4,10 @@
 namespace Puck::Control
 {
     void Setup();
-    void Vibrate(int milliOn, int milliOff, bool loop);
+    void vibrate(int milliOn, int milliOff, bool loop);
+    void stopVibrate();
     void DrawText(const char *message);
+    bool isButtonPressed();
 };
 
 #endif

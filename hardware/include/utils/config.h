@@ -14,6 +14,7 @@ namespace Puck
     constexpr static gpio_num_t DISPLAY_CS_PIN = GPIO_NUM_2;
     constexpr static gpio_num_t DISPLAY_DC_PIN = GPIO_NUM_3;
     constexpr static gpio_num_t DISPLAY_RST_PIN = GPIO_NUM_4;
+    constexpr static gpio_num_t BUTTON_PIN = GPIO_NUM_13;
 };
 
 #endif

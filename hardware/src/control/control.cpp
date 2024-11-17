@@ -2,6 +2,9 @@
 
 #include "Arduino.h"
 #include "utils/timer.h"
+#include "utils/config.h"
+#include "utils/status.h"
+#include "utils/logging.h"
 #include "control/display.h"
 #include "control/vibration.h"
 
@@ -11,6 +14,7 @@ namespace Puck::Control
     {
         setupDisplay();
         setupVibration();
+        pinMode(BUTTON_PIN, INPUT_PULLUP);
     }
 
     void DrawText(const char *message)
@@ -33,9 +37,24 @@ namespace Puck::Control
     }
 
     // TODO: Impliment usage milliOff
-    void Vibrate(int milliOn, int milliOff, bool loop)
+    void vibrate(int milliOn, int milliOff, bool loop)
     {
-        enableVibration();
-        timerDelay(milliOn, &disableVibration);
+        if (!getVibrationStatus()) {
+            enableVibration();
+            timerDelay(milliOn, &disableVibration);
+        }
+    }
+
+    void stopVibrate() {
+        disableVibration();
+    }
+
+    bool isButtonPressed() {
+        logln(digitalRead(BUTTON_PIN));
+        if (digitalRead(BUTTON_PIN) == HIGH) {
+            return false;
+        } else {
+            return true;
+        }
     }
 };

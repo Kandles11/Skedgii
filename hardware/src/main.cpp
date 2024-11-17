@@ -5,6 +5,7 @@
 #include "utils/logging.h"
 #include "utils/timer.h"
 #include "utils/config.h"
+#include "utils/status.h"
 #include "control/control.h"
 #include "wifi/wireless.h"
 #include "wifi/connection.h"
@@ -18,7 +19,7 @@ void setup()
         Serial.begin(115200);
 
     Control::Setup();
-    Control::Vibrate(1000, 1000, true);
+    Control::vibrate(10000, 1000, true);
     Control::DrawText("Hello World 1\nHello World 2\nHello World 3");
 
     // Connect to the WiFi
@@ -27,6 +28,9 @@ void setup()
 
 void loop()
 {
+    if (Control::isButtonPressed() && getVibrationStatus()) {
+        Control::stopVibrate();
+    }
     delay(100);
     timerStep();
 }
