@@ -8,10 +8,12 @@ class Professor(models.Model):
         return self.first_name + ' ' + self.last_name
     
 class Course(models.Model):
-    name = models.CharField(max_length=100)
-    code = models.CharField(max_length=20)
+    title = models.CharField(max_length=100)
+    number = models.CharField()
+    subject = models.CharField(max_length=10)
+    internal_number = models.CharField()
     def __str__(self):
-        return self.name
+        return self.title
     
 class Rating(models.Model):
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
@@ -19,7 +21,7 @@ class Rating(models.Model):
     def __str__(self):
         return str(self.rating)
     
-class SectionGrade(models.Model):
+class ProfGrade(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
     grade = models.FloatField()
