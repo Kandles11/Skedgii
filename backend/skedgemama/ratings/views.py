@@ -132,6 +132,7 @@ def rate_classes(data):
         parsed_courses = [parse_course(course) for course in combinations]
 
         total_heuristic = 0
+        calculations = []
 
         for course in parsed_courses:
             class_id = course["class_id"]
@@ -175,13 +176,15 @@ def rate_classes(data):
                         mycourse,
                         myprof,
                     )
-
+            if mycourse:
+                calc = f"{mycourse.subject} {mycourse.number}: +{course_heuristic:.01f}"
+                calculations.append(calc)
             total_heuristic += course_heuristic
 
         # Add heuristic and original combination to results
         logging.info("Total heuristic for schedule ID %s: %s", schedule_id, total_heuristic)
         results.append(
-            {"id": schedule_id, "heuristic": total_heuristic, "combination": combinations}
+            {"id": schedule_id, "heuristic": total_heuristic, "combination": combinations, "tooltip": '\n'.join(calculations) if len(calculations) else ''}
         )
 
     # Sort results by heuristic in descending order
