@@ -5,7 +5,11 @@
   "version": "1.0",
   "browser_action": {
     "default_popup": "hello.html",
-    "default_icon": "hello_extensions.png"
+    "default_icon": "assets/skedgii_icon_48.png"
+  },
+  "icons": {
+    "48": "assets/skedgii_icon_48.png",
+    "96": "assets/skedgii_icon_96.png"
   },
   "background": {
     "scripts": ["background.js"],
